@@ -1,0 +1,23 @@
+cmake_minimum_required(VERSION 3.5)
+
+project(tinytetris-commented)
+
+message(STATUS "PROJECT_SOURCE_DIR " ${PROJECT_SOURCE_DIR})
+message(STATUS "PROJECT_BINARY_DIR " ${PROJECT_BINARY_DIR})
+
+set(VERSION_MAJOR 1)
+set(VERSION_MINOR 0)
+set(PROJECT_NAME tinytetris)
+
+configure_file (
+  "${PROJECT_SOURCE_DIR}/build.h.in"
+  "${PROJECT_BINARY_DIR}/build.h"
+  )
+
+find_package(Curses REQUIRED)
+include_directories(${CURSES_INCLUDE_DIRS})
+
+aux_source_directory(. DIR_SRCS)
+
+add_executable(${PROJECT_NAME} ${DIR_SRCS})
+target_link_libraries( ${PROJECT_NAME} ${CURSES_LIBRARIES} )
